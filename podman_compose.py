@@ -1007,6 +1007,7 @@ def get_net_args_from_network_mode(compose: PodmanCompose, cnt: dict[str, Any]) 
 
 
 def get_net_args(compose: PodmanCompose, cnt: dict[str, Any]) -> list[str]:
+    return []
     net = cnt.get("network_mode")
     if net:
         return get_net_args_from_network_mode(compose, cnt)
@@ -2448,6 +2449,7 @@ class PodmanCompose:
         if len(missing_nets):
             missing_nets_str = ",".join(missing_nets)
             raise RuntimeError(f"missing networks: {missing_nets_str}")
+        self.default_net = None
         # volumes: [...]
         self.vols = compose.get("volumes", {})
         podman_compose_labels = [
